@@ -4,9 +4,7 @@ import {Link} from 'react-router-dom';
 import Button from '../common/Button';
 
 const StyledAuthForm=styled.div`
-    h3{
-        
-    }
+
 `;
 
 
@@ -38,18 +36,28 @@ const Footer=styled.div`
     }
 `;
 
-const AuthForm=({type})=>{
+const AuthForm=({type, form,onChange,onSubmit})=>{
     return(
         <StyledAuthForm>
             
-            <form>
-                <StyledInput autoComplete='username' name='username' placeholder='아이디'></StyledInput>
+            <form onSubmit={onSubmit}>
+                {/*아이디 입력필드*/}
+                <StyledInput 
+                autoComplete='username' 
+                name='username' 
+                placeholder='아이디'
+                onChange={onChange}
+                value={form.username}
+                ></StyledInput>
 
+                {/* 비밀번호 입력 필드 */}
                 <StyledInput
-                    autoComplete='new-password'
+                    autoComplete='new-password' 
                     name="password"
                     placeholder='비밀번호'
                     type='password'
+                    onChange={onChange}
+                    value={form.password}
                 ></StyledInput>
 
                 {type==='회원가입' && (
@@ -58,13 +66,13 @@ const AuthForm=({type})=>{
                     name="passwordConfirm"
                     placeholder='비밀번호 확인'
                     type='password'
+                    onChange={onChange}
+                    value={form.passwordConfirm}
                     />
                 )}
 
                 <Button>{type}</Button>
             </form>
-
-
 
             <Footer>
                 {type==='로그인'?(
